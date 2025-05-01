@@ -5,26 +5,32 @@ import java.time.format.DateTimeFormatter;
 
 
 public class Transaction {
-    private LocalDateTime deposit;
+    private LocalDateTime time;
     private String description;
     private String vendor;
     private double price;
 
 
+    public Transaction(LocalDateTime localDateTime, double price) {
+        this.time = localDateTime;
+        this.description = "";
+        this.vendor = "";
+        this.price = price;
+    }
     public Transaction(LocalDateTime localDateTime, String description, String vendor, double price) {
-        this.deposit = localDateTime;
+        this.time = localDateTime;
         this.description = description;
         this.vendor = vendor;
         this.price = price;
 
     }
 
-    public LocalDateTime getDeposit() {
-        return deposit;
+    public LocalDateTime getTime() {
+        return time;
     }
 
-    public void setDeposit(LocalDateTime deposit) {
-        this.deposit = deposit;
+    public void setTime(LocalDateTime time) {
+        this.time = time;
     }
 
     public String getDescription() {
@@ -51,13 +57,11 @@ public class Transaction {
         this.price = price;
     }
 
-    public String display() {
+    public String toCsv() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd|HH:mm:ss");
         StringBuilder builder = new StringBuilder();
-        builder.append(deposit.format(format)).append("|").append(description).append("|").append(vendor)
+        builder.append(time.format(format)).append("|").append(description).append("|").append(vendor)
                 .append("|").append(price);
-
-
 
         return builder.toString();
 
